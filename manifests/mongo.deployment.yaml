@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ddp-api
+  name: ddp-mongo
   labels:
-    app: ddp-api
+    app: ddp-mongo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ddp-api
+      app: ddp-mongo
   template:
     metadata:
       labels:
-        app: ddp-api
+        app: ddp-mongo
     spec:
       containers:
-      - name: ddp-api
-        image: ddp-api:latest
+      - name: ddp-mongo
+        image: mongo:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 27017

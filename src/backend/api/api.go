@@ -43,12 +43,12 @@ func BuildRouter(coll *mongo.Collection, c context.Context) chi.Router {
 	log.Debug().Msg("Registering static file server, to serve the frontend")
 
 	// Setup a file server for the static UI files
-	fs := http.FileServer(http.Dir("./build/ui"))
+	fs := http.FileServer(http.Dir("./ui"))
 
 	// Catch all routes
 	router.Get("/*", func(w http.ResponseWriter, r *http.Request) {
 		// If the request is not a real file, serve the index.html instead
-		path := filepath.Join("./build/ui", strings.TrimPrefix(r.URL.Path, "/"))
+		path := filepath.Join("./ui", strings.TrimPrefix(r.URL.Path, "/"))
 		if _, err := os.Stat(path); err != nil {
 			r.URL.Path = "/"
 		}

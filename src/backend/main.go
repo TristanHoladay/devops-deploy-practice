@@ -58,7 +58,6 @@ func main() {
 	log.Info().Msg("Starting FORM API")
 	router := api.BuildRouter(collection, ctx)
 
-	// envConfig := config.ProcessEnvConfig()
 	log.Info().Msg("Running FORM API on port 8900")
 	err := http.ListenAndServe(":8900", router)
 	if err != nil {
