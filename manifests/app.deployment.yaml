@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: ddp-api
-        image: ddp-api:latest
+        image: localhost:5500/ddp-api:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8900
