@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/TristanHoladay/devops-deploy-practice/src/backend/api"
 
@@ -10,14 +12,27 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+
+	"github.com/joho/godotenv"
 )
 
 var collection *mongo.Collection
 var ctx = context.TODO()
 
-func init() {
+func loadEnvConfig() {
+	log.Info().Msg("Loading env config")
+	err := godotenv.Load()
+	if err != nil {
+		log.Err(err).Msg("failed to get env file")
+	}
+
+}
+
+func createDBConn() {
 	log.Info().Msg("Creating database client connection")
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017/")
+	mongoURL := fmt.Sprintf("mongodb://%s:%s/", os.Getenv("MONGO_SERVER"), os.Getenv("MONGO_PORT"))
+	fmt.Println(mongoURL)
+	clientOptions := options.Client().ApplyURI(mongoURL)
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to make mongodb connection")
@@ -32,9 +47,15 @@ func init() {
 	collection = client.Database("devops_deploy").Collection("users")
 }
 
-func main() {
-	log.Info().Msg("Starting FORM API")
+func init() {
+	loadEnvConfig()
+	createDBConn()
+}
 
+func main() {
+	godotenv.Load(".env")
+
+	log.Info().Msg("Starting FORM API")
 	router := api.BuildRouter(collection, ctx)
 
 	// envConfig := config.ProcessEnvConfig()

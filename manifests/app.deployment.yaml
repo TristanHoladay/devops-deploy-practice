@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-deploy-practice
+  labels:
+    app: devops-deploy-practice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops-deploy-practice
+  template:
+    metadata:
+      labels:
+        app: devops-deploy-practice
+    spec:
+      containers:
+      - name: devops-deploy-practice-go
+        image: ddp:latest
+        ports:
+        - containerPort: 8080
