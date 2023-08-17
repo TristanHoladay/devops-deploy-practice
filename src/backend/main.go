@@ -21,7 +21,7 @@ var ctx = context.TODO()
 
 func loadEnvConfig() {
 	log.Info().Msg("Loading env config")
-	err := godotenv.Load()
+	err := godotenv.Load("env/.env")
 	if err != nil {
 		log.Err(err).Msg("failed to get env file")
 	}
@@ -31,7 +31,6 @@ func loadEnvConfig() {
 func createDBConn() {
 	log.Info().Msg("Creating database client connection")
 	mongoURL := fmt.Sprintf("mongodb://%s:%s/", os.Getenv("MONGO_SERVER"), os.Getenv("MONGO_PORT"))
-	fmt.Println(mongoURL)
 	clientOptions := options.Client().ApplyURI(mongoURL)
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
@@ -53,8 +52,6 @@ func init() {
 }
 
 func main() {
-	godotenv.Load(".env")
-
 	log.Info().Msg("Starting FORM API")
 	router := api.BuildRouter(collection, ctx)
 

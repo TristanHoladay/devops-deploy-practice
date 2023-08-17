@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -61,11 +60,8 @@ func BuildRouter(coll *mongo.Collection, c context.Context) chi.Router {
 func SubmitForm(w http.ResponseWriter, r *http.Request) {
 	log.Debug().Msg("submitting form data")
 	r.ParseForm()
-	fmt.Println(r.FormValue("first-name"))
-	fmt.Println(r.FormValue("last-name"))
 	user := User{firstName: r.FormValue("first-name"), lastName: r.FormValue("last-name")}
-
-	// fmt.Println(user)
+	log.Info().Msg("saving: " + r.FormValue("first-name") + " " + r.FormValue("first-name"))
 
 	_, err := collection.InsertOne(ctx, bson.D{{"firstName", user.firstName}, {"lastName", user.lastName}})
 	if err != nil {

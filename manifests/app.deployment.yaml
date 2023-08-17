@@ -16,6 +16,17 @@ spec:
     spec:
       containers:
       - name: ddp-api
-        image: localhost:5500/ddp-api:latest
+        image: 77373/ddp-api:1.0.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 8900
+        volumeMounts:
+        - name: env-config
+          mountPath: /build/env
+          readOnly: true
+                  
+      volumes:
+        - name: env-config
+          secret:
+            secretName: env-config
+
