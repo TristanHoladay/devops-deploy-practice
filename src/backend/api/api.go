@@ -31,30 +31,32 @@ func BuildRouter(coll *mongo.Collection, c context.Context) chi.Router {
 
 	router.Use(middleware.Logger)
 	router.Use(middleware.Recoverer)
-
-	log.Debug().Msg("Registering API routes")
-
-	// router.Route("/", func(r chi.Router) {
-
-	// })
-	router.Post("/form-submit", SubmitForm)
-
-	log.Debug().Msg("Registering static file server, to serve the frontend")
-
-	// Setup a file server for the static UI files
-	fs := http.FileServer(http.Dir("./ui"))
-
-	// Catch all routes
-	router.Get("/*", func(w http.ResponseWriter, r *http.Request) {
-		// If the request is not a real file, serve the index.html instead
-		path := filepath.Join("./ui", strings.TrimPrefix(r.URL.Path, "/"))
-		if _, err := os.Stat(path); err != nil {
-			r.URL.Path = "/"
-		}
-		fs.ServeHTTP(w, r)
-	})
+	setUpRoutes(router)
 
 	return router
+}
+
+func setUpRoutes(router chi.Router) {
+	log.Debug().Msg("Registering API routes")
+
+	// Catch all routes
+	router.Get("/*", handleCatchAllGet)
+	router.Post("/form-submit", SubmitForm)
+}
+
+func createFileServer() http.Handler {
+	log.Debug().Msg("Registering static file server, to serve the frontend")
+	return http.FileServer(http.Dir("./ui"))
+}
+
+func handleCatchAllGet(w http.ResponseWriter, r *http.Request) {
+	// If the request is not a real file, serve the index.html instead
+	path := filepath.Join("./ui", strings.TrimPrefix(r.URL.Path, "/"))
+	fs := createFileServer()
+	if _, err := os.Stat(path); err != nil {
+		r.URL.Path = "/"
+	}
+	fs.ServeHTTP(w, r)
 }
 
 func SubmitForm(w http.ResponseWriter, r *http.Request) {
