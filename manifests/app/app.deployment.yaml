@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ddp-api
-        image: 77373/ddp-api:1.0.0
+        image: ddp-api:1
         imagePullPolicy: Always
         ports:
         - containerPort: 8900
