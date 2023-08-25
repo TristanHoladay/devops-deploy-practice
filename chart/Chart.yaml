@@ -1,0 +1,6 @@
+apiVersion: v2
+name: devop-deploy-practice
+description: A helm chart to deploy a simple Go app for practice.
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
