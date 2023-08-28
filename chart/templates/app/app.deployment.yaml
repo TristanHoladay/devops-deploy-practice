@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name}}-dep
-  namespace: {{ .Values.namespace}}
+  name: {{ .Release.Name}}-api
+  namespace: {{ .Values.namespace }}
   labels:
-    app: ddp-api
+    app: {{ .Release.Name }}-api
 spec:
   replicas: 1
   selector:
@@ -16,7 +16,7 @@ spec:
         app: ddp-api
     spec:
       containers:
-      - name: ddp-api
+      - name: {{ .Release.Name}}-api
         image: 77373/ddp-api:1.0.0
         imagePullPolicy: Always
         ports:

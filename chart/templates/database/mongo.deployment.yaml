@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name}}-mongo-dep
-  namespace: {{ .Values.namespace}}
+  name: {{ .Release.Name }}-mongo
+  namespace: {{ .Values.namespace }}
   labels:
-    app: ddp-mongo
+    app: {{ .Release.Name }}-mongo
 spec:
   replicas: 1
   selector:
