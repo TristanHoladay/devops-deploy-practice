@@ -5,7 +5,7 @@ namespace: ddp
 secretGenerator:
 - name: env-config
   files:
-  - ../env/.env
+  - env/.env
   type: Opaque
 
 configurations:
