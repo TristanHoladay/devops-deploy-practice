@@ -5,6 +5,9 @@ metadata:
   namespace: ddp
 spec:
   interval: 1m
+  valuesFrom:
+      - kind: Secret
+        name: env-config
   chart:
     spec:
       chart: ./chart
@@ -14,6 +17,4 @@ spec:
         name: ddp
         namespace: flux-system
       interval: 1m
-      valuesFrom:
-      - kind: Secret
-        name: env-config
+      
