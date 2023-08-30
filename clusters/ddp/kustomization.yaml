@@ -13,5 +13,5 @@ secretGenerator:
     - env/.env
   type: Opaque
 
-configurations:
-  - kustomizeconfig.yaml
+# configurations:
+#   - kustomizeconfig.yaml
