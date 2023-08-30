@@ -7,7 +7,7 @@ spec:
   interval: 1m
   valuesFrom:
       - kind: Secret
-        name: env-config
+        name: env-config-49gchcccd7
   chart:
     spec:
       chart: ./chart
