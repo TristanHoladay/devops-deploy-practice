@@ -2,5 +2,5 @@ nameReference:
 - kind: Secret
   version: v1
   fieldSpecs:
-  - path: spec/volumes/secret/secretname
+  - path: spec/valuesFrom/name
     kind: HelmRelease
