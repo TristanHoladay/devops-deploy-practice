@@ -21,13 +21,16 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8900
-        volumeMounts:
-        - name: env-config
-          mountPath: /build/env
-          readOnly: true
+        envFrom:
+        - secretRef:
+            name: {{ .Release.Name }}-env-config
+      #   volumeMounts:
+      #   - name: env-config
+      #     mountPath: /build/env
+      #     readOnly: true
                   
-      volumes:
-        - name: env-config
-          secret:
-            secretName: env-config
+      # volumes:
+      #   - name: env-config
+      #     secret:
+      #       secretName: env-config
 

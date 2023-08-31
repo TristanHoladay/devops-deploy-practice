@@ -12,21 +12,10 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-
-	"github.com/joho/godotenv"
 )
 
 var collection *mongo.Collection
 var ctx = context.TODO()
-
-func loadEnvConfig() {
-	log.Info().Msg("Loading env config")
-	err := godotenv.Load("env/.env")
-	if err != nil {
-		log.Err(err).Msg("failed to get env file")
-	}
-
-}
 
 func createDBConn() {
 	log.Info().Msg("Creating database client connection")
@@ -47,7 +36,7 @@ func createDBConn() {
 }
 
 func init() {
-	loadEnvConfig()
+	// loadEnvConfig()
 	createDBConn()
 }
 

@@ -1,11 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-secretGenerator:
-- name: env-config
-  files:
-  - env/.env
-  type: Opaque
+# secretGenerator:
+# - name: env-config
+#   files:
+#   - env/.env
+#   type: Opaque
 
 resources:
 - ./database 
