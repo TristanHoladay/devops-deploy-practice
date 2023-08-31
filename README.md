@@ -6,3 +6,4 @@
 2) create k3d cluster `k3d cluster create <name> <optional portforwarding>`
 3) cd into devops-deploy-practice dir
 4) run `helm install ddp chart/`
+5) run `helm ls -A`
