@@ -11,7 +11,7 @@ spec:
       version: '*'
       sourceRef:
         kind: GitRepository
-        name: ddp
+        name: flux-system
         namespace: flux-system
       interval: 1m
       
