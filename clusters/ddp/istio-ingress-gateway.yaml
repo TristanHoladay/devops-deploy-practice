@@ -1,0 +1,17 @@
+# apiVersion: networking.istio.io/v1alpha3
+# kind: Gateway
+# metadata:
+#   name: ddp-gateway
+# spec:
+#   selector:
+#     app: ddp-gateway-controller
+#   servers:
+#   - port:
+#       number: 8888
+#       name: http
+#       protocol: HTTP
+#     hosts:
+#     - ext-host.example.com
+#     tls:
+#       mode: SIMPLE
+#       credentialName: ext-host-cert

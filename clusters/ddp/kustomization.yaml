@@ -4,6 +4,7 @@ namespace: ddp
 
 resources:
   - namespace.yaml
+  - istio-ingress-gateway.yaml
   - repository.yaml
   - release.yaml
 
