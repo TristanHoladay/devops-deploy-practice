@@ -4,6 +4,7 @@ namespace: ddp
 
 secretGenerator:
 - name: env-config
+  namespace: ddp
   files:
     - env/.env
   type: Opaque
