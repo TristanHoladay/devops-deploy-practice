@@ -7,3 +7,4 @@
 3) cd into devops-deploy-practice dir
 4) run `helm install ddp chart/`
 5) run `helm ls -A`
+6) should show ddp release
